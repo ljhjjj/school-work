@@ -21,4 +21,5 @@
 ---
 
 ## 메모
-* 
+* ODE 풀이 시 초기조건(Initial Condition)을 반드시 확인할 것
+* 복소수 표현: $e^{i\theta} = \cos\theta + i\sin\theta$ (오일러 공식)

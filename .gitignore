@@ -1,2 +1,40 @@
-# 옵시디언 설정 폴더 전체 무시
+# ===== 옵시디언 =====
 .obsidian/
+
+# ===== 운영 체제 =====
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Windows
+Thumbs.db
+Desktop.ini
+
+# Linux
+.directory
+
+# ===== 에디터 =====
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# ===== 임시 파일 =====
+*.tmp
+*.temp
+*.bak
+*~
+.swp
+
+# ===== 시스템 파일 =====
+*.log
+.DS_Store
+
+# ===== 대용량 파일 (선택) =====
+# 강의 영상은 Git에 올리지 않음 (용량 초과 위험)
+# *.mp4
+# *.avi
+
+# ===== 로컬 설정 =====
+config.local.json

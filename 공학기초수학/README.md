@@ -17,6 +17,9 @@
 * **2-1.** 완전 미분방정식 (Exact ODEs) 및 적분 인자
 * **2-2.** 1계 선형 상미분방정식 (First-order Linear ODEs) 및 베르누이 방정식
 * **2-3.** 오일러 공식과 복소수를 활용한 ODE 풀이 (Complexification)
+* **3-1.** 선형연산자와 냉각방정식의 해석
+* **3-2.** 1계 ODE의 응답 해석: Gain과 Phase Lag
+* **3-3.** 자율 미분방정식 (Autonomous ODEs)
 
 ---
 

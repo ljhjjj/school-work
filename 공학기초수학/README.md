@@ -22,6 +22,9 @@
 * **3-3.** 자율 미분방정식 (Autonomous ODEs)
 * **3-4.** 2계 미분방정식의 도입 (Spring-Mass System)
 * **3-5.** 2계 선형 ODE: 상수 계수를 갖는 제차 방정식
+* **4-1.** 2계 선형 ODE: 복소수 근 (Case 3)
+* **4-2.** 오일러 방정식 (Euler's Equation)
+* **4-3.** 2계 선형 ODE의 해의 성질과 론스키안(Wronskian)
 
 ---
 

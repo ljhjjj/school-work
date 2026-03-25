@@ -9,7 +9,6 @@
 ---
 
 ## 학습 진도
-> 아래 목록에 새로운 학습 파일을 추가하여 진도를 관리합니다.
 
 * **1-1.** 상미분방정식(ODE)의 기본 개념 및 방향장(Slope Field)
 * **1-2.** 해의 존재와 유일성 정리 (Existence and Uniqueness)
@@ -29,5 +28,4 @@
 ---
 
 ## 메모
-* ODE 풀이 시 초기조건(Initial Condition)을 반드시 확인할 것
-* 복소수 표현: $e^{i\theta} = \cos\theta + i\sin\theta$ (오일러 공식)
+* 자세한 계산은 부록을 참고할 것

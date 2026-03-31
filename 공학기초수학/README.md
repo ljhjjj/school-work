@@ -24,6 +24,8 @@
 * **4-1.** 2계 선형 ODE: 복소수 근 (Case 3)
 * **4-2.** 오일러 방정식 (Euler's Equation)
 * **4-3.** 2계 선형 ODE의 해의 성질과 론스키안(Wronskian)
+* **5-1.** 비제차 선형 미분방정식 (Non-homogeneous Linear ODEs)
+* **5-2.** 특수해 구하기 3번째 방법: 복소수화 기법 (Complexification)
 
 ---
 

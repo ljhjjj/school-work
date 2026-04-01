@@ -1,5 +1,5 @@
 
-# [부록] 매개변수 변환법 공식 유도 (Derivation of Variation of Parameters)
+# [부록] 5-1-2: 매개변수 변환법 공식 유도 (Derivation of Variation of Parameters)
 
 본 유도 과정은 상수 계수가 아닌 일반적인 2계 선형 비제차 미분방정식 $y'' + p(t)y' + q(t)y = r(t)$ 의 특수해 $Y_p$를 구하는 매개변수 변환법의 공식 도출 과정입니다.
 

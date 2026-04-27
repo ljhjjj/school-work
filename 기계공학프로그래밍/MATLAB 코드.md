@@ -122,30 +122,30 @@
 
 ### 그래프 그리기 (Plotting)
 
-|**함수 / 구문**|**설명**|
-|---|---|
-|`plot(x,y,LineSpec)`|`x`에 대한 `y`의 그래프 생성 (`LineSpec`은 선택 사항)|
-|`-, --, :, -.`|**선 스타일 (Line styles):** 실선, 파선, 점선, 1점 쇄선|
-|`+, o, *, ., x, s, d`|**마커 (Markers):** 더하기, 원, 별표, 점, x표, 사각형(square), 다이아몬드|
-|`r, g, b, c, m, y, k, w`|**색상 (Colors):** 빨강, 초록, 파랑, 청록, 자홍, 노랑, 검정, 흰색|
-|_(LineSpec 예시)_|`LineSpec`은 선 스타일, 마커, 색상을 문자열로 결합한 것입니다. (예: `"-r"` = 마커 없는 빨간색 실선)|
-|`title("Title")`|그래프 제목 추가|
-|`legend("1st", "2nd")`|축에 범례 추가|
-|`x/y/zlabel("label")`|x/y/z 축 레이블 추가|
-|`x/y/zticks(ticksvec)`|x/y/z 축 눈금(ticks) 가져오기 또는 설정|
-|`x/y/zticklabels(labels)`|x/y/z 축 눈금 레이블 가져오기 또는 설정|
-|`x/y/ztickangle(angle)`|x/y/z 축 눈금 레이블 회전|
-|`x/y/zlim`|x/y/z 축 표시 범위 가져오기 또는 설정|
-|`axis(lim), axis style`|축 제한 및 스타일 설정|
-|`text(x,y,"txt")`|텍스트 추가|
-|`grid on/off`|축 눈금선(그리드) 표시/숨기기|
-|`hold on/off`|새 그래프를 추가할 때 현재 그래프를 유지/해제|
-|`subplot(m,n,p)`<br><br>  <br><br>`tiledlayout(m,n)`|바둑판식(타일형) 위치에 여러 축 생성|
-|`yyaxis left/right`|두 번째 y축 생성|
-|`figure`|피규어(Figure) 창 생성|
-|`gcf, gca`|현재 피규어(Get current figure) 가져오기, 현재 축(Get current axis) 가져오기|
-|`clf`|현재 피규어 내용 지우기|
-|`close all`|열려 있는 모든 피규어 창 닫기|
+| **함수 / 구문**                            | **설명**                                                               |
+| -------------------------------------- | -------------------------------------------------------------------- |
+| `plot(x,y,LineSpec)`                   | `x`에 대한 `y`의 그래프 생성 (`LineSpec`은 선택 사항)                              |
+| `-, --, :, -.`                         | **선 스타일 (Line styles):** 실선, 파선, 점선, 1점 쇄선                           |
+| `+, o, *, ., x, s, d`                  | **마커 (Markers):** 더하기, 원, 별표, 점, x표, 사각형(square), 다이아몬드              |
+| `r, g, b, c, m, y, k, w`               | **색상 (Colors):** 빨강, 초록, 파랑, 청록, 자홍, 노랑, 검정, 흰색                      |
+| _(LineSpec 예시)_                        | `LineSpec`은 선 스타일, 마커, 색상을 문자열로 결합한 것입니다. (예: `"-r"` = 마커 없는 빨간색 실선) |
+| `title("Title")`                       | 그래프 제목 추가                                                            |
+| `legend("1st", "2nd")`                 | 축에 범례 추가                                                             |
+| `x/y/zlabel("label")`                  | x/y/z 축 레이블 추가                                                       |
+| `x/y/zticks(ticksvec)`                 | x/y/z 축 눈금(ticks) 가져오기 또는 설정                                         |
+| `x/y/zticklabels(labels)`              | x/y/z 축 눈금 레이블 가져오기 또는 설정                                            |
+| `x/y/ztickangle(angle)`                | x/y/z 축 눈금 레이블 회전                                                    |
+| `x/y/zlim`                             | x/y/z 축 표시 범위 가져오기 또는 설정                                             |
+| `axis(lim), axis style`                | 축 제한 및 스타일 설정                                                        |
+| `text(x,y,"txt")`                      | 텍스트 추가                                                               |
+| `grid on/off`                          | 축 눈금선(그리드) 표시/숨기기                                                    |
+| `hold on/off`                          | 새 그래프를 추가할 때 현재 그래프를 유지/해제                                           |
+| `subplot(m,n,p)`<br>`tiledlayout(m,n)` | 바둑판식(타일형) 위치에 여러 축 생성                                                |
+| `yyaxis left/right`                    | 두 번째 y축 생성                                                           |
+| `figure`                               | 피규어(Figure) 창 생성                                                     |
+| `gcf, gca`                             | 현재 피규어(Get current figure) 가져오기, 현재 축(Get current axis) 가져오기         |
+| `clf`                                  | 현재 피규어 내용 지우기                                                        |
+| `close all`                            | 열려 있는 모든 피규어 창 닫기                                                    |
 
 ### 일반적인 그래프 유형 (Common Plot Types)
 

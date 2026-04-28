@@ -30,7 +30,6 @@
 ```json
 {
   "status": "pending",
-  "priority": 10,
   "subject": "고체역학",
   "week": "3",
   "session": "1",
@@ -40,26 +39,35 @@
   "plan_file": "고체역학/고체역학_3-1_PLAN.md",
   "sources": [
     {
+      "path": "inbox/고체역학/3-1/lecture_stt.txt",
+      "type": "stt_txt",
+      "role": "primary_scope_anchor",
+      "priority": 1
+    },
+    {
       "path": "inbox/고체역학/3-1/handwritten_note.pdf",
       "type": "note_pdf",
-      "role": "scope_anchor",
-      "priority": 1
+      "role": "bounded_merge_source",
+      "priority": 2
     },
     {
       "path": "inbox/고체역학/3-1/lecture_slide.pdf",
       "type": "ppt_pdf",
       "role": "verification_only",
-      "priority": 2
-    },
-    {
-      "path": "inbox/고체역학/3-1/lecture_stt.txt",
-      "type": "stt_txt",
-      "role": "scope_anchor",
       "priority": 3
     }
   ]
 }
 ```
+
+### 파일 역할(Role) 정의
+
+| role                   | 의미                |
+| ---------------------- | ----------------- |
+| `primary_scope_anchor` | 본문 범위의 최종 기준      |
+| `bounded_merge_source` | 범위 안에서만 병합 가능한 자료 |
+| `structure_anchor`     | 목차/슬라이드 순서 기준     |
+| `verification_only`    | 용어·공식·기호 검증 전용    |
 
 ## 8. 작업 선택 우선순위
 1. 사용자가 과목/주차/차시를 명시한 작업을 최우선으로 선택한다.

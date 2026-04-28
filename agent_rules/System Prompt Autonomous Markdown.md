@@ -43,15 +43,21 @@
 - **실행 행동:** 👉 셸 명령어(`Get-Content`, `type` 등)를 통해 `agent_rules/codex_execution_guide.md` 읽기
 - **목적:** Codex가 Windows workspace에서 파일 변경 전후 git 상태, diff, 검증 명령, 실패 로그, 최종 보고를 안전하게 수행하도록 통제한다.
 
+### 📌 Guide F: 입력 수집 및 작업 발견
+- **언제 읽나요 (Trigger):** [문서 생성/수정 작업 시] 사용자가 구체적인 파일 경로를 제공하지 않았거나, `inbox` 기반 작업 처리를 요청했을 때.
+- **실행 행동:** 👉 셸 명령어(`Get-Content`, `type` 등)를 통해 `agent_rules/input_acquisition_guide.md` 읽기
+- **목적:** `inbox/` 폴더와 `input_manifest.json`을 기준으로 작업 대상을 자동 발견하고, 입력 파일 목록을 확정한다.
+
 ---
 
 ## ⚙️ 표준 작업 흐름 (Standard Workflow)
 **문서화 작업에 한해** 다음 순서대로 움직입니다. (단순 질문 시 생략)
 
 1. `Guide E` 확인 ➔ 작업 전 workspace/git 상태 확인
-2. `Guide A` 확인 ➔ 타겟 차시의 `_PLAN.md` 읽기 (없으면 새로 생성)
-3. 입력 자료가 있다면 `Guide B` 확인 ➔ 정보 분석 및 `_PLAN.md` 업데이트
-4. 본문 작성이 필요하면 `Guide C` 확인 ➔ 마크다운 파일 생성/작성
-5. `Guide D` 확인 ➔ 저장된 `.md`와 `_PLAN.md` 검증
-6. `Guide A` 재확인 ➔ 검증 결과와 완료 상태를 `_PLAN.md`에 반영
-7. `Guide E` 재확인 ➔ 작업 후 git diff 요약 및 최종 보고
+2. `Guide F` 확인 ➔ 입력 작업 발견 및 manifest 확인
+3. `Guide A` 확인 ➔ 타겟 차시의 `_PLAN.md` 읽기 (없으면 새로 생성)
+4. 입력 자료가 있다면 `Guide B` 확인 ➔ 정보 분석 및 `_PLAN.md` 업데이트
+5. 본문 작성이 필요하면 `Guide C` 확인 ➔ 마크다운 파일 생성/작성
+6. `Guide D` 확인 ➔ 저장된 `.md`와 `_PLAN.md` 검증
+7. `Guide A` 재확인 ➔ 검증 결과와 완료 상태를 `_PLAN.md`에 반영
+8. `Guide E` 재확인 ➔ 작업 후 git diff 요약 및 최종 보고

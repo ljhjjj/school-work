@@ -42,16 +42,19 @@
     {
       "path": "inbox/고체역학/3-1/handwritten_note.pdf",
       "type": "note_pdf",
+      "role": "scope_anchor",
       "priority": 1
     },
     {
       "path": "inbox/고체역학/3-1/lecture_slide.pdf",
       "type": "ppt_pdf",
+      "role": "verification_only",
       "priority": 2
     },
     {
       "path": "inbox/고체역학/3-1/lecture_stt.txt",
       "type": "stt_txt",
+      "role": "scope_anchor",
       "priority": 3
     }
   ]

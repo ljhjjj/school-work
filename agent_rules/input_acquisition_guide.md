@@ -25,3 +25,10 @@
 ## 6. 완료 후 처리
 - 완료된 입력 폴더는 `archive/`로 이동하지 않고, manifest 상태만 `completed`로 바꾼다.
 - 원본 파일은 보존한다.
+
+## 7. 상태 전이 규칙
+- 작업 시작 직후 `pending` → `in_progress`
+- 정상 완료 후 `in_progress` → `completed`
+- 데이터 누락/판독 불가로 사용자 입력이 필요한 경우 `blocked`
+- 시스템 오류, 저장 실패, 검증 실패로 계속할 수 없는 경우 `failed`
+- `blocked` 또는 `failed` 전환 시 PLAN에 재개 지점을 기록한다.

@@ -48,6 +48,11 @@
 - **실행 행동:** 👉 셸 명령어(`Get-Content`, `type` 등)를 통해 `agent_rules/input_acquisition_guide.md` 읽기
 - **목적:** `inbox/` 폴더와 `input_manifest.json`을 기준으로 작업 대상을 자동 발견하고, 입력 파일 목록을 확정한다.
 
+### 📌 Guide G: 웹 교차검증
+- **언제 읽나요 (Trigger):** [문서 생성/수정 작업의 최종 검수 단계] STT 오류 의심 전문 용어, 보편 공식/단위/기호 오타, 표준 용어 확인이 필요할 때.
+- **실행 행동:** 👉 셸 명령어(`Get-Content`, `type` 등)를 통해 `agent_rules/web_cross_validation_guide.md` 읽기
+- **목적:** 인터넷 자료를 본문 근거가 아닌 제한적 검증 보조 자료로 사용하여 전문 용어와 공식 표기의 오류 가능성을 낮춘다.
+
 ---
 
 ## ⚙️ 표준 작업 흐름 (Standard Workflow)
@@ -59,5 +64,6 @@
 4. 입력 자료가 있다면 `Guide B` 확인 ➔ 정보 분석 및 `_PLAN.md` 업데이트
 5. 본문 작성이 필요하면 `Guide C` 확인 ➔ 마크다운 파일 생성/작성
 6. `Guide D` 확인 ➔ 저장된 `.md`와 `_PLAN.md` 검증
-7. `Guide A` 재확인 ➔ 검증 결과와 완료 상태를 `_PLAN.md`에 반영
-8. `Guide E` 재확인 ➔ 작업 후 git diff 요약 및 최종 보고
+7. 필요 시 `Guide G` 확인 ➔ 전문 용어/공식/단위 제한적 웹 교차검증
+8. `Guide A` 재확인 ➔ 검증 결과와 완료 상태를 `_PLAN.md`에 반영
+9. `Guide E` 재확인 ➔ 작업 후 git diff 요약 및 최종 보고

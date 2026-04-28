@@ -30,6 +30,7 @@
 ```json
 {
   "status": "pending",
+  "priority": 10,
   "subject": "고체역학",
   "week": "3",
   "session": "1",
@@ -60,8 +61,8 @@
 ## 8. 작업 선택 우선순위
 1. 사용자가 과목/주차/차시를 명시한 작업을 최우선으로 선택한다.
 2. 그다음 `status: pending`인 manifest를 선택한다.
-3. pending 작업이 여러 개면 `priority` 값이 낮은 작업을 우선한다.
-4. priority가 없으면 최신 수정 시간이 가장 오래된 작업부터 처리한다.
+3. pending 작업이 여러 개면 manifest 최상위 `priority` 값이 낮은 작업을 우선한다.
+4. manifest 최상위 `priority`가 없으면 최신 수정 시간이 가장 오래된 작업부터 처리한다.
 5. 그래도 불명확하면 사용자에게 한 번만 질문한다.
 
 ## 9. 상태 전이 규칙
@@ -70,3 +71,4 @@
 - 데이터 누락/판독 불가로 사용자 입력이 필요한 경우 `blocked`
 - 시스템 오류, 저장 실패, 검증 실패로 계속할 수 없는 경우 `failed`
 - `blocked` 또는 `failed` 전환 시 PLAN에 재개 지점을 기록한다.
+

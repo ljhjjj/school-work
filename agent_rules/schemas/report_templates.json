@@ -1,0 +1,38 @@
+{
+  "validation_report": [
+    "## ✅ Validation Report\n",
+    "### 통과 항목",
+    "- 파일명/경로 규칙 통과",
+    "- H1/H2/H3 구조 통과",
+    "- 수식 렌더링 규칙 통과",
+    "- PLAN 체크박스 일치 확인\n",
+    "### 자동 수정 항목",
+    "- {auto_fixed_items}\n",
+    "### 잔여 이슈",
+    "- {remaining_issues}\n",
+    "### 최종 상태",
+    "- {final_status}"
+  ],
+  "execution_summary": [
+    "## 작업 요약",
+    "- 생성/수정한 파일: {modified_files}",
+    "- 완료한 섹션: {completed_sections}",
+    "- 자동 수정한 항목: {auto_fixed_items}",
+    "- 검증 결과: {validation_result}",
+    "- 남은 이슈: {remaining_issues}",
+    "- 다음 재개 지점: {next_resume_point}"
+  ],
+  "pr_summary": [
+    "## Summary",
+    "- Added/updated lecture note for `{subject} {week}-{session}`",
+    "- Updated corresponding PLAN file",
+    "- Applied validation checks\n",
+    "## Validation",
+    "- [x] Markdown structure checked",
+    "- [x] LaTeX block formatting checked",
+    "- [x] PLAN/file consistency checked",
+    "- [ ] {validation_tool_status}\n",
+    "## Remaining Issues",
+    "- {remaining_issues}"
+  ]
+}

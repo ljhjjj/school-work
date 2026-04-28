@@ -1,0 +1,57 @@
+{
+  "auto_fix_policy": {
+    "max_attempts_per_error": 2,
+    "auto_fixable": [
+      "missing_h2_number",
+      "latex_block_newline_missing",
+      "missing_horizontal_rule",
+      "checkbox_state_missing"
+    ],
+    "requires_confirmation": [
+      "file_rename",
+      "file_move",
+      "bulk_style_rewrite",
+      "delete_content"
+    ],
+    "on_failure": {
+      "plan_section": "### ⚠️ 검증 이슈",
+      "include_in_final_report": true,
+      "continue_next_task": true
+    }
+  },
+  "dangerous_commands": {
+    "match_mode": "prefix_or_contains",
+    "policy": "Do not execute unless the user explicitly requested it.",
+    "requires_explicit_user_approval": [
+      { "pattern": "rm -rf", "match": "contains" },
+      { "pattern": "Remove-Item", "match": "prefix" },
+      { "pattern": "ri -r", "match": "contains" },
+      { "pattern": "del ", "match": "prefix" },
+      { "pattern": "erase ", "match": "prefix" },
+      { "pattern": "rmdir ", "match": "prefix" },
+      { "pattern": "git reset", "match": "prefix" },
+      { "pattern": "git clean", "match": "prefix" },
+      { "pattern": "git checkout", "match": "prefix" },
+      { "pattern": "git switch", "match": "prefix" },
+      { "pattern": "git restore", "match": "prefix" },
+      { "pattern": "git push", "match": "prefix" },
+      { "pattern": "git commit", "match": "prefix" },
+      { "pattern": "npm install", "match": "prefix" },
+      { "pattern": "pip install", "match": "prefix" }
+    ]
+  },
+  "git_checks": {
+    "before_work": [
+      "git status --short",
+      "git diff --stat"
+    ],
+    "after_work": [
+      "git status --short",
+      "git diff --stat",
+      "git diff -- \"{modified_file}\""
+    ],
+    "optional": [
+      "git diff --name-only"
+    ]
+  }
+}

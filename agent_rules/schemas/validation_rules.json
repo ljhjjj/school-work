@@ -1,0 +1,79 @@
+{
+  "paths": {
+    "pattern_mode": "template_then_regex",
+    "description": "Evaluate patterns as regex only AFTER substituting {subject}, {week}, and {session} with actual values.",
+    "note_file": {
+      "pattern": "^{subject}/{subject} {week}-{session}\\.md$",
+      "example": "고체역학/고체역학 3-1.md"
+    },
+    "plan_file": {
+      "pattern": "^{subject}/{subject}_{week}-{session}_PLAN\\.md$",
+      "example": "고체역학/고체역학_3-1_PLAN.md"
+    }
+  },
+  "encoding": "utf-8",
+  "markdown_structure": {
+    "h1": {
+      "required_count": 1,
+      "pattern": "^# .+ \\d+-\\d+: .+$"
+    },
+    "h2": {
+      "pattern": "^## \\d+\\. .+",
+      "require_horizontal_rule_after_section": true
+    },
+    "h3": {
+      "pattern": "^### \\d+\\) .+",
+      "required": false
+    }
+  },
+  "latex": {
+    "inline_pattern": "\\$[^$\\n]+\\$",
+    "block_delimiter": "$$",
+    "block_must_be_standalone": true,
+    "forbidden_patterns": [
+      ".*\\$\\$[^\\n]+\\$\\$.*",
+      "<math[\\s>]",
+      "</math>"
+    ],
+    "discouraged_macros": [
+      {
+        "pattern": "\\\\underbrace",
+        "severity": "warning",
+        "action": "report_only"
+      },
+      {
+        "pattern": "\\\\overbrace",
+        "severity": "warning",
+        "action": "report_only"
+      },
+      {
+        "pattern": "\\\\begin\\{array\\}",
+        "severity": "warning",
+        "action": "report_only"
+      },
+      {
+        "pattern": "\\\\begin\\{aligned\\}",
+        "severity": "warning",
+        "action": "report_only"
+      }
+    ]
+  },
+  "warning_tags": {
+    "search_terms": [
+      "[?]",
+      "TODO",
+      "판독 불가",
+      "수동 입력 필요",
+      "추정",
+      "확인 필요",
+      "⚠️"
+    ],
+    "report_section": "잔여 이슈",
+    "false_positive_exceptions": [
+      "## ✅ Validation Report",
+      "#### ⚠️ 실행 이슈",
+      "#### ⚠️ 검증 이슈",
+      "[x] Blocker 처리 종료"
+    ]
+  }
+}

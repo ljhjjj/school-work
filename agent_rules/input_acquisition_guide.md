@@ -25,3 +25,42 @@
 ## 6. 완료 후 처리
 - 완료된 입력 폴더는 `archive/`로 이동하지 않고, manifest 상태만 `completed`로 바꾼다.
 - 원본 파일은 보존한다.
+
+## 7. `input_manifest.json` 스키마 예시
+
+```json
+{
+  "status": "pending",
+  "subject": "고체역학",
+  "week": "3",
+  "session": "1",
+  "task_type": "new_note",
+  "input_root": "inbox/고체역학/3-1",
+  "output_note": "고체역학/고체역학 3-1.md",
+  "plan_file": "고체역학/고체역학_3-1_PLAN.md",
+  "sources": [
+    {
+      "path": "inbox/고체역학/3-1/handwritten_note.pdf",
+      "type": "note_pdf",
+      "priority": 1
+    },
+    {
+      "path": "inbox/고체역학/3-1/lecture_slide.pdf",
+      "type": "ppt_pdf",
+      "priority": 2
+    },
+    {
+      "path": "inbox/고체역학/3-1/lecture_stt.txt",
+      "type": "stt_txt",
+      "priority": 3
+    }
+  ]
+}
+```
+
+## 8. 작업 선택 우선순위
+1. 사용자가 과목/주차/차시를 명시한 작업을 최우선으로 선택한다.
+2. 그다음 `status: pending`인 manifest를 선택한다.
+3. pending 작업이 여러 개면 `priority` 값이 낮은 작업을 우선한다.
+4. priority가 없으면 최신 수정 시간이 가장 오래된 작업부터 처리한다.
+5. 그래도 불명확하면 사용자에게 한 번만 질문한다.

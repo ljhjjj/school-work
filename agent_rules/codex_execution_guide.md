@@ -16,7 +16,7 @@ Codex가 Windows 로컬 workspace/repository에서 파일을 생성, 수정, 검
 - 경로에 한글이 포함된 경우 반드시 따옴표로 감싼다.
 
 ### 3.2 Git 상태 확인
-- `agent_rules/codex_policy.json`의 `git_checks.before_work`에 명시된 명령어 세트를 환경에 맞게 실행하여 현재 변경 상태를 파악한다.
+- `schemas/codex_policy.json`의 `git_checks.before_work`에 명시된 명령어 세트를 환경에 맞게 실행하여 현재 변경 상태를 파악한다.
 
 ### 3.3 기존 변경 보호
 - 사용자가 만든 기존 변경사항을 임의로 덮어쓰지 않는다.
@@ -24,7 +24,7 @@ Codex가 Windows 로컬 workspace/repository에서 파일을 생성, 수정, 검
 - 충돌이 의심되면 PLAN 파일에 기록하고 대기한다.
 
 ### 3.4 필수 설정 파일(JSON) 누락 시 예외 처리 (Fallback)
-- `agent_rules/` 폴더 내에 필수 설정 파일(`validation_rules.json`, `codex_policy.json`, `report_templates.json`)이 존재하지 않거나 읽을 수 없는 경우 무한 대기하거나 작업을 중단하지 않는다.
+- `schemas/` 폴더 내에 필수 설정 파일(`schemas/validation_rules.json`, `schemas/codex_policy.json`, `schemas/report_templates.json`)이 존재하지 않거나 읽을 수 없는 경우 무한 대기하거나 작업을 중단하지 않는다.
 - 파일 누락이 확인되면, 에이전트의 자체적인 기본 지식(보편적인 마크다운 H1/H2 구조, 일반적인 파일명 규칙 등)을 바탕으로 검증과 작업을 강행한다.
 - 작업 완료 후 최종 리포트 및 PLAN의 `[⚠️ 실행 이슈]`에 **"필수 설정 파일(JSON) 누락으로 인해 기본 규칙으로 대체 실행됨"** 사실을 반드시 명시한다.
 
@@ -51,7 +51,7 @@ Codex가 Windows 로컬 workspace/repository에서 파일을 생성, 수정, 검
 - 폴더 생성 예: `New-Item -ItemType Directory -Force -Path "과목명"`
 - Bash/Git Bash 환경일 경우 호환 명령(`cat`, `mkdir -p` 등)을 허용한다.
 ### 5.2 위험 명령 제한
-- `agent_rules/codex_policy.json`의 `dangerous_commands` 목록을 확인한다. (파일이 없다면 `rm -rf`, `npm install` 등의 파괴적/설치 명령을 기본적으로 차단한다.)
+- `schemas/codex_policy.json`의 `dangerous_commands` 목록을 확인한다. (파일이 없다면 `rm -rf`, `npm install` 등의 파괴적/설치 명령을 기본적으로 차단한다.)
 - 목록에 포함된 명령은 사용자 명시 요청 없이 절대 임의로 실행하지 않는다.
 
 ### 5.3 설치 금지 기본값
@@ -59,7 +59,7 @@ Codex가 Windows 로컬 workspace/repository에서 파일을 생성, 수정, 검
 
 ## 6. 검증 실행 절차
 파일 변경 후 가능한 경우 다음 순서로 검증한다.
-1. `validation_guide.md` 및 `validation_rules.json` 읽기 및 검사 수행 (없을 시 기본 마크다운 룰 적용)
+1. `validation_guide.md` 및 `schemas/validation_rules.json` 읽기 및 검사 수행 (없을 시 기본 마크다운 룰 적용)
 2. PLAN 체크박스와 실제 파일 비교
 3. 미해결 warning 태그 검색 
 4. 검증 결과를 PLAN 및 최종 리포트에 반영
@@ -73,7 +73,7 @@ Codex가 Windows 로컬 workspace/repository에서 파일을 생성, 수정, 검
 ## 8. 작업 후 확인 절차
 
 ### 8.1 변경 내역 확인
-- `agent_rules/codex_policy.json`의 `git_checks.after_work`에 명시된 명령어를 사용하여 방금 수행한 파일 변경 내역(diff)을 최종 확인한다.
+- `schemas/codex_policy.json`의 `git_checks.after_work`에 명시된 명령어를 사용하여 방금 수행한 파일 변경 내역(diff)을 최종 확인한다.
 
 ### 8.2 작업 요약 및 최종 보고 형식
-- 최종 리포트 및 PR 본문 출력 시 가능한 경우 `agent_rules/report_templates.json`의 `execution_summary` 또는 `pr_summary` 템플릿을 우선 사용한다. (템플릿 누락 시 일반적인 리포트 양식으로 간결하게 자체 출력)
+- 최종 리포트 및 PR 본문 출력 시 가능한 경우 `schemas/report_templates.json`의 `execution_summary` 또는 `pr_summary` 템플릿을 우선 사용한다. (템플릿 누락 시 일반적인 리포트 양식으로 간결하게 자체 출력)

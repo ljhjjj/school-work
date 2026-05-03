@@ -26,17 +26,27 @@ Codex가 Windows 로컬 workspace/repository에서 파일을 생성, 수정, 검
 - 내가 변경하지 않은 파일의 diff를 임의로 수정하지 않는다.
 - 충돌이 의심되면 PLAN 파일에 기록하고 대기한다.
 
-### 3.4 필수 설정 파일(JSON) 누락 시 예외 처리 (Fallback)
-- `schemas/` 폴더 내에 필수 설정 파일(`schemas/validation_rules.json`, `schemas/codex_policy.json`, `schemas/report_templates.json`)이 존재하지 않거나 읽을 수 없는 경우 무한 대기하거나 작업을 중단하지 않는다.
-- 파일 누락이 확인되면, 에이전트의 자체적인 기본 지식(보편적인 마크다운 H1/H2 구조, 일반적인 파일명 규칙 등)을 바탕으로 검증과 작업을 강행한다.
-- 작업 완료 후 최종 리포트 및 PLAN의 `[⚠️ 실행 이슈]`에 **"필수 설정 파일(JSON) 누락으로 인해 기본 규칙으로 대체 실행됨"** 사실을 반드시 명시한다.
+### 3.4 JSON 누락 시 처리
 
-### 3.5 가이드 재확인 기준
+- JSON 파일이 누락된 경우, 해당 JSON이 필요한 기계적 검증/분류는 수행하지 않는다.
+- 단, 비파괴적 읽기, 문서 검토, 일반적인 Markdown 작성은 계속할 수 있다.
+- 위험 명령 제한, 기존 변경 보호, UTF-8 인코딩 등 P0 안전 정책은 System Prompt의 중앙 P0 규칙을 따른다.
+- 작업 완료 후 `[⚠️ 실행 이슈]`에 어떤 JSON 파일이 없어 어떤 검증 또는 분류를 생략했는지 기록한다.
+- 누락된 JSON 규칙을 임의의 기억이나 추측으로 완전히 대체하지 않는다.
+
+### 3.5 JSON Canonical Source 원칙
+
+- `schemas/` 폴더의 JSON 파일은 해당 도메인의 유일한 기계 해석 가능한 규칙(canonical source)이다.
+- Markdown 가이드는 규칙의 적용 맥락, 예외 상황, 사용 절차를 설명한다.
+- JSON과 Markdown이 충돌할 경우 JSON을 우선한다.
+- 단, 위험 명령 제한, 기존 변경 보호, UTF-8 인코딩 등 P0 안전 정책은 JSON 누락 여부와 무관하게 항상 유지한다.
+
+### 3.6 가이드 재확인 기준
 - 같은 목적의 가이드 문서 반복 읽기로 실행을 지연시키지 않는다.
 - 작업 재개, 검증 실패 원인 분석, 파일 변경 후 컨텍스트 손실, 규칙 충돌 확인이 필요한 경우에는 관련 가이드 문서를 다시 확인할 수 있다.
 - 가이드를 재확인한 뒤에는 확인한 규칙을 적용해 다음 작업으로 진행한다.
 
-### 3.6 사용자 질문 기준
+### 3.7 사용자 질문 기준
 - 작업 시작에 필요한 대상 폴더, 과목, 주차, 차시, 처리할 manifest 또는 입력 세트, 작업 유형이 불명확한 경우에만 사용자에게 질문한다.
 - 본문 범위 대응, STT/PDF/필기 자료 간 매칭, 강의 범위 안의 일부 해석 근거가 불확실한 경우에는 즉시 질문하지 않는다.
 - 질문하지 않는 불확실성은 PLAN 또는 최종 보고서의 이슈/불확실성 섹션에 기록하고, 본문에는 단정적으로 병합하지 않는다.
@@ -76,11 +86,11 @@ Codex가 Windows 로컬 workspace/repository에서 파일을 생성, 수정, 검
 - 폴더 생성 예: `New-Item -ItemType Directory -Force -Path "과목명"`
 - Bash/Git Bash 환경일 경우 호환 명령(`cat`, `mkdir -p` 등)을 허용한다.
 ### 5.2 위험 명령 제한
-- `schemas/codex_policy.json`의 `dangerous_commands`를 확인한다. 위험 명령은 명령 이름이 아니라 실제 행위 기준으로 판단한다.
-- 단순 조회 명령은 허용하되, 변경 작업과 결합되어 있으면 위험 명령으로 본다.
-- 삭제/파괴, 대량 이동/덮어쓰기, git 히스토리 변경, 브랜치 전환/복원, 원격 전송, 외부 코드 다운로드 후 실행, 패키지 설치/환경 변경, 권한 상승/실행 정책 우회는 사용자 명시 요청 없이 실행하지 않는다.
-- PowerShell 별칭(`rm`, `ri`, `del`, `erase`)과 다운로드 후 실행 패턴(`curl ... | powershell`, `Invoke-WebRequest ...; powershell ...`)도 같은 기준으로 판단한다.
-- `git status`, `git diff`, `git branch --show-current`처럼 조회만 수행하는 명령은 브랜치 전환이나 파일 복원 명령과 구분한다.
+
+- 위험 명령 분류 및 정책은 `schemas/codex_policy.json`의 `dangerous_commands`를 따른다.
+- 조회 전용 명령과 변경 명령의 구분은 해당 JSON의 `read_only_commands`와 `requires_explicit_user_approval`을 따른다.
+- Markdown 본문에는 카테고리별 세부 패턴을 반복 서술하지 않는다.
+- JSON 누락 시에도 삭제, 초기화, 권한 우회, 외부 코드 실행 등 명백한 고위험 명령은 사용자 승인 없이 실행하지 않는다.
 
 ### 5.3 설치 금지 기본값
 검증 도구가 없다고 해서 패키지를 임의 설치하지 않는다. (수동 정규식 검사로 대체)
@@ -121,9 +131,11 @@ Codex가 Windows 로컬 workspace/repository에서 파일을 생성, 수정, 검
 
 ## 6. 검증 실행 절차
 파일 변경 후 가능한 경우 다음 순서로 검증한다.
-1. `validation_guide.md` 및 `schemas/validation_rules.json` 읽기 및 검사 수행 (없을 시 기본 마크다운 룰 적용)
+1. `validation_guide.md` 및 `schemas/validation_rules.json`을 확인해 검사한다.
+   - `schemas/validation_rules.json`이 누락된 경우 JSON 기반 구조 검증은 생략하고, 생략 사실을 `[⚠️ 실행 이슈]`에 기록한다.
+   - 단, 명백한 Markdown 문법 오류나 파일 저장/인코딩 문제처럼 JSON 없이도 확인 가능한 비기계적 점검은 수행할 수 있다.
 2. PLAN 체크박스와 실제 파일 비교
-3. 미해결 warning 태그 검색 
+3. 미해결 warning 태그 검색
 4. 검증 결과를 PLAN 및 최종 리포트에 반영
 
 ## 7. 실패 처리 정책
@@ -152,10 +164,7 @@ Codex가 Windows 로컬 workspace/repository에서 파일을 생성, 수정, 검
 - 작업 전부터 존재하던 dirty 상태와 이번 작업으로 생긴 변경을 혼동하지 않도록, 가능한 경우 작업 전/후 상태 차이를 함께 기록한다.
 
 ### 8.2 작업 요약 및 최종 보고 형식
-- 최종 리포트는 작업 유형에 맞는 `schemas/report_templates.json` 템플릿을 선택한다.
-  - 강의노트 생성/갱신/정리/변환: `lecture_note_execution_summary`
-  - 규칙 파일 검토/정리/일관성 수정: `rule_review_summary`
-  - 단순 파일 수정: `simple_file_change_summary`
-  - 검증만 수행: `validation_only_summary`
-- `execution_summary`는 하위 호환용 별칭으로만 사용하고, PR 본문이 필요한 경우에만 `pr_summary`를 사용한다.
-- 템플릿이 누락된 경우에는 작업 유형에 맞는 일반 리포트 양식으로 간결하게 자체 출력한다.
+
+- 최종 리포트는 `schemas/report_templates.json`의 템플릿을 선택한다.
+- 템플릿 선택 기준은 해당 JSON의 `template_selection`을 따른다.
+- Markdown 본문에는 개별 템플릿 내용을 반복 서술하지 않는다.

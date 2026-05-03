@@ -12,23 +12,32 @@
 - 실행 정책: `schemas/codex_policy.json`
 
 ## 3. Required Checks
-- `schemas/validation_rules.json`의 `paths`와 `encoding` 규칙을 확인한다.
-- 주요 지침 파일과 산출물은 UTF-8로 읽히는지 확인한다.
-- 한글이 깨져 보이면 `Get-Content -Raw -Encoding UTF8` 결과와 콘솔 출력 상태를 구분해 기록한다.
-- Python 기반 PDF/OCR/검증 스크립트를 사용하기 전 `conda run -n pdfkit310 python --version`으로 기준 환경을 확인한다.
-- `markdown_structure` 규칙에 따라 H1, H2, H3 구조를 확인한다.
-- 각 H2 섹션의 끝에 다음 H2로 넘어가기 전 구분선 `---`가 있는지 확인한다.
-- H2 제목 바로 다음 줄에 있는 `---`는 H2 섹션 끝 구분선으로 보지 않는다.
-- `latex` 규칙에 따라 인라인/블록 수식, 금지 패턴, 경고 매크로를 확인한다.
-- PLAN 파일과 출력 파일 경로가 일치하는지 확인한다.
-- PLAN 체크박스의 완료/미완료 상태가 재개 지점과 일관되는지 확인한다.
-- 변경 검증 시 `git diff`만 보지 않고 `git status --short`의 untracked 항목도 확인한다.
-- tracked 수정 파일은 `git diff -- <tracked modified files>`로 확인하고, 신규 파일은 `git status --short`의 `??` 항목으로 별도 확인한다.
-- 삭제 파일은 `git status --short`에서 `D` 상태로 별도 기록한다.
-- 신규 파일 또는 신규 폴더가 있으면 내용 검증 대상에 포함하고 생성 목적을 기록한다.
+
+- 구조 검증 항목은 `schemas/validation_rules.json`의 `markdown_structure`, `latex`, `input_coverage`를 따른다.
+- 파일 경로 및 인코딩 규칙은 해당 JSON의 `paths`, `encoding`을 따른다.
+- 태그 분류 기준은 해당 JSON의 `normal_status_tags`와 `residual_issue_tags`를 따른다.
+- Markdown 가이드는 검증 절차와 보고 방식만 설명한다.
+- `latex` 규칙에 따라 인라인/블록 수식, 금지 패턴(`<math>` 태그 등), deprecated 매크로를 확인한다.
+- `\begin{aligned}`, `\begin{array}`, `\underbrace`, `\overbrace`는 표준 매크로이므로 warning 대상이 아니다.
+- `\begin{eqnarray}` 등 deprecated 매크로는 `report_only`로 기록한다.
+
+## 3.1 Hard Rule / Soft Rule
+
+- Hard/soft rule의 실제 분류는 `schemas/validation_rules.json`의 `severity.hard_rules`와 `severity.soft_rules`를 따른다.
+- 이 섹션의 예시는 해당 JSON 분류를 설명하기 위한 보조 설명이다.
+- Hard rule 위반은 작업 완료로 인정하지 않는다. 가능한 경우 자동 수정하고, 자동 수정이 불가능하면 최종 리포트의 잔여 이슈에 명시한다.
+- Soft rule 위반은 작업을 중단하지 않는다. 최종 리포트 또는 PLAN의 `[⚠️ 실행 이슈]` / `잔여 이슈`에 기록한다.
+- 제목이 존재하지 않는 경우와 권장 제목 형식에 맞지 않는 경우를 구분한다.
+- H1 required count 위반은 hard rule이다.
+- H1/H2/H3가 `recommended_pattern`에 맞지 않는 경우는 soft rule이다.
+- 자유 제목은 허용하되, 강의노트 표준 형식에서는 `recommended_pattern`을 권장한다.
+- H2 구분선 누락은 문서 구조 일관성을 위해 hard rule로 유지한다.
 
 ## 4. 입력 커버리지 검증
 - 입력 커버리지 검증은 H1/H2/H3, 수식, 경로 같은 구조 검증과 별도로 수행한다.
+- Mini PLAN에서는 입력 커버리지 검증을 구조 검증과 통합하여 수행한다.
+- Full PLAN에서는 구조 검증과 입력 커버리지 검증을 분리하여 수행한다.
+- slide-only 작업에서 Mini PLAN을 사용하는 경우 전체 슬라이드 검토 여부만 확인한다.
 - PLAN의 `페이지 판독 기록`과 최종 마크다운 본문을 대조해 입력별 핵심 항목 반영 여부를 확인한다.
 - 손글씨 PDF, 슬라이드 PDF, STT TXT 등 입력 자료별로 확인한 핵심 개념, 공식, 도식, 용어가 본문에 반영되었거나 제외 사유가 기록되었는지 확인한다.
 - 입력 자료가 여러 페이지이면 파일 단위로 뭉뚱그리지 않고 `p.1`, `p.2`처럼 페이지 단위 체크리스트를 만든다.
@@ -63,11 +72,11 @@
 - `py --version` 실패나 WindowsApps Python 런처 오류는 PDF/OCR 작업 실패가 아니라 Python 실행 환경 이슈로 기록한다.
 - `conda run -n pdfkit310 python`까지 실패한 경우에만 Python 기반 PDF/OCR 실행 가능성에 영향을 주는 환경 이슈로 승격한다.
 - 환경 이슈가 없으면 `environment_issues` placeholder 값을 `없음`으로 채워 기록한다.
-- 최종 리포트는 작업 유형에 맞는 `schemas/report_templates.json` 템플릿을 선택한다.
-  - 강의노트 생성/갱신/정리/변환: `lecture_note_execution_summary`
-  - 규칙 파일 검토/정리/일관성 수정: `rule_review_summary`
-  - 단순 파일 수정: `simple_file_change_summary`
-  - 검증만 수행: `validation_only_summary`
+- 검증 결과는 hard rule 위반과 soft rule 위반으로 나누어 보고한다.
+- hard rule 위반이 남아 있으면 `completed`로 처리하지 않는다.
+- soft rule 위반만 남아 있으면 `completed_with_warnings` 또는 이에 준하는 상태로 보고할 수 있다.
+- 최종 리포트는 `schemas/report_templates.json`의 `template_selection`에 따라 선택한다.
+- Markdown 가이드에는 개별 템플릿 선택 규칙을 반복 서술하지 않는다.
 - 구조 및 입력 커버리지 검증 결과를 자세히 보고해야 하는 경우에는 `validation_report` 섹션을 함께 사용한다.
 - `validation_report`를 사용하는 경우 섹션명과 순서는 다음과 같이 유지한다.
   - `구조 검증 결과`

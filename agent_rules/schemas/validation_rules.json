@@ -12,19 +12,39 @@
     }
   },
   "encoding": "utf-8",
+  "severity": {
+    "hard_rules": [
+      "paths",
+      "encoding",
+      "h1_required_count",
+      "h2_horizontal_rule",
+      "forbidden_patterns",
+      "input_coverage.required"
+    ],
+    "soft_rules": [
+      "h1_recommended_pattern",
+      "h2_recommended_pattern",
+      "h3_recommended_pattern",
+      "latex_discouraged_macros",
+      "plan_detail_level"
+    ]
+  },
   "markdown_structure": {
     "h1": {
       "required_count": 1,
-      "pattern": "^# .+ \\d+-\\d+: .+$"
+      "pattern": "^# .+$",
+      "recommended_pattern": "^# .+ \\d+-\\d+: .+$"
     },
     "h2": {
-      "pattern": "^## \\d+\\. .+",
+      "pattern": "^## .+",
+      "recommended_pattern": "^## \\d+\\. .+",
       "require_horizontal_rule_at_section_end": true,
       "horizontal_rule_position": "before_next_h2_or_end_of_document",
       "horizontal_rule_must_not_immediately_follow_h2": true
     },
     "h3": {
-      "pattern": "^### \\d+\\) .+",
+      "pattern": "^### .+",
+      "recommended_pattern": "^### \\d+\\) .+",
       "required": false
     }
   },
@@ -84,26 +104,30 @@
       "<math[\\s>]",
       "</math>"
     ],
-    "discouraged_macros": [
+    "allowed_macros": [
       {
-        "pattern": "\\\\underbrace",
-        "severity": "warning",
-        "action": "report_only"
-      },
-      {
-        "pattern": "\\\\overbrace",
-        "severity": "warning",
-        "action": "report_only"
+        "pattern": "\\\\begin\\{aligned\\}",
+        "note": "standard multi-line equation environment"
       },
       {
         "pattern": "\\\\begin\\{array\\}",
-        "severity": "warning",
-        "action": "report_only"
+        "note": "standard tabular math environment"
       },
       {
-        "pattern": "\\\\begin\\{aligned\\}",
+        "pattern": "\\\\underbrace",
+        "note": "standard annotation macro"
+      },
+      {
+        "pattern": "\\\\overbrace",
+        "note": "standard annotation macro"
+      }
+    ],
+    "discouraged_macros": [
+      {
+        "pattern": "\\\\begin\\{eqnarray\\}",
         "severity": "warning",
-        "action": "report_only"
+        "action": "report_only",
+        "reason": "deprecated; use aligned instead"
       }
     ]
   },

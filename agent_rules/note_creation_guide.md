@@ -1,6 +1,9 @@
+<!-- Guide Tier: Mixed -->
+<!-- Contains: P0 safety rules, P1 workflow rules, P2 reference rules -->
+
 # Note_creation_guide
 
-## Output Language Policy
+## [P1] Output Language Policy
 - Final markdown lecture notes must be written in Korean by default.
 - Use the objective Korean written style `~한다`, `~이다`.
 - Technical terms should be written in Korean first, with English terms in parentheses when useful.
@@ -9,7 +12,7 @@
 - Do not write the final note in English merely because the AI guidelines or PLAN are written in English.
 - Write the final markdown lecture note in English only when the user explicitly requests English output, such as "영어로 출력" or "영문 노트로 작성".
 
-## 1. 파일 네이밍 및 저장 경로 규칙
+## [P0/P1] 1. 파일 네이밍 및 저장 경로 규칙
 - **파일명 규칙:** `[과목명] [주차]-[차시].md`  
   예: `고체역학 3-1.md`
 - **저장 경로 규칙:** 현재 프로젝트 루트(workspace) 하위의 `output/[과목명]/` 폴더 내 저장한다.
@@ -23,7 +26,7 @@
   - *PowerShell (권장):* `New-Item -ItemType Directory -Force -Path "output/[과목명]"`
   - *CMD:* `if not exist "output\[과목명]" mkdir "output\[과목명]"`
 
-## 2. 본문 생성 규칙
+## [P1] 2. 본문 생성 규칙
 - **디테일 보존 원칙:** 요약 요청이 없는 한 세부 내용, 예시, 도출 과정을 생략하지 마세요.
 - **긴 문서의 자율 연속 작성:** 결과물이 방대해 출력이 끊기더라도 묻지 말고 PLAN 파일을 참조해 멈춘 부분부터 자율적으로 이어서 작성/저장합니다.
 - **[실패 복구(Fallback) 절차]:** 툴 오류, 저장 실패, 토큰 한계 등으로 연속 진행이 불가능해진 경우:
@@ -31,7 +34,7 @@
   2. 실패 원인을 `_PLAN.md`의 `### ⚠️ 실행 이슈` 섹션에 남깁니다.
   3. 다음 재개 지점을 명확히 표시하고 대기합니다.
 
-## 3. 문서 구조 및 서식 규칙
+## [P1] 3. 문서 구조 및 서식 규칙
 1. **메인 제목 (H1) 및 대주제 (H2)**
    - 양식: `# [과목명] [주차]-[차시]: [주제]`, `## 1. 주제명`
    - 각 H2 섹션의 끝에는 다음 H2로 넘어가기 전에 구분선 `---`를 배치한다.

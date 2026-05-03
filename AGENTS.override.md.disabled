@@ -1,0 +1,22 @@
+# Plain Codex Mode
+
+Use normal Codex behavior for this session.
+Do not apply the lecture-note automation workflow from AGENTS.md.
+
+## Encoding and File Reading
+- Always read text-based files with explicit UTF-8 decoding.
+- Do not rely on Windows/PowerShell default encoding or terminal code page.
+- Preferred PowerShell read command: `Get-Content -Raw -Encoding UTF8 "path/to/file"`.
+- Preferred PowerShell search command: `Select-String -Encoding UTF8 -Path "path/to/file" -Pattern "..."`.
+- Preferred Python read pattern: `Path(path).read_text(encoding="utf-8")` or `open(path, encoding="utf-8")`.
+- If Korean text appears garbled, re-read the file explicitly as UTF-8 before editing or reporting an issue.
+- If UTF-8 decoding still fails, report an encoding issue instead of guessing or silently rewriting the file.
+- Binary files such as PDFs and images must be handled with appropriate parsers/renderers, not plain-text reads.
+
+## Rules
+- Follow only the user's current prompt.
+- Do not create or update PLAN files unless explicitly requested.
+- Do not process inbox/ or input_manifest.json unless explicitly requested.
+- Inspect relevant files before editing.
+- Make minimal, targeted changes.
+- Report changed files and checks run.

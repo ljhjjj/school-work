@@ -1,0 +1,64 @@
+파일을 다음 위치에 저장한다
+inbox/고체역학/3-1/lecture_stt.txt 
+inbox/고체역학/3-1/handwritten_note.pdf 
+inbox/고체역학/3-1/lecture_slide.pdf
+
+Get-ChildItem "AGENTS.override.md*"
+Remove-Item "AGENTS.override.md.disabled"
+Rename-Item "AGENTS.override.md" "AGENTS.override.md.disabled"
+로 모드를 노트정리모드로 바꾼다.
+
+----------------
+일반 사용법
+
+codex를 노트정리모드로 바꾸고, 다음을 입력한다.
+
+inbox/고체역학/8-2 작업을 처리해줘.
+
+input_manifest.json이 없으면 다음 기준으로 자동 생성해줘.
+- lecture_stt.txt: stt_txt, primary_scope_anchor
+- handwritten_note.pdf: note_pdf, bounded_merge_source
+- lecture_slide.pdf: ppt_pdf, verification_only
+
+manifest 생성 후 PLAN 파일을 만들고,
+그 기준으로 고체역학/고체역학 8-2.md를 작성해줘.
+
+
+--------------------------------------
+
+고급 사용법
+
+inbox/고체역학/3-1/input_manifest.json을 미리 만들어서 작업을 요청할 수도 있다.
+input_manifest.json을 미리 AI등을 사용해서 재작한다 다음은 그 예시다.
+
+{
+  "status": "pending",
+  "task_priority": 10,
+  "subject": "고체역학",
+  "week": "3",
+  "session": "1",
+  "task_type": "new_note",
+  "input_root": "inbox/고체역학/3-1",
+  "output_note": "고체역학/고체역학 3-1.md",
+  "plan_file": "고체역학/고체역학_3-1_PLAN.md",
+  "sources": [
+    {
+      "path": "inbox/고체역학/3-1/lecture_stt.txt",
+      "type": "stt_txt",
+      "role": "primary_scope_anchor",
+      "priority": 1
+    },
+    {
+      "path": "inbox/고체역학/3-1/handwritten_note.pdf",
+      "type": "note_pdf",
+      "role": "bounded_merge_source",
+      "priority": 2
+    },
+    {
+      "path": "inbox/고체역학/3-1/lecture_slide.pdf",
+      "type": "ppt_pdf",
+      "role": "verification_only",
+      "priority": 3
+    }
+  ]
+}

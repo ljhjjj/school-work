@@ -1,0 +1,46 @@
+codex 기본 사용 가이드문제해결용 가이드
+
+1. codex 접속하기
+codex
+
+2. codex 나가기
+/exit
+
+3. 전 codex 대화 이어가기
+codex resume
+
+4. codex 상태 확인하기
+/status
+
+5. codex 종료하지 않고 새 대화
+/clear
+
+6. codex 요약
+/compact
+
+----------
+Problem_request 사용법
+
+1. Problem_request를 AI에게 Issue 별로 분리한 버전으로 바꾼다.
+
+2. 다음 코드로 AGENTS.override.md 파일을 만들어서 codex를 일반 모드로 바꾼다.
+@'
+# Plain Codex Mode
+
+Use normal Codex behavior for this session.
+Do not apply the lecture-note automation workflow from AGENTS.md.
+
+## Rules
+- Follow only the user's current prompt.
+- Do not create or update PLAN files unless explicitly requested.
+- Do not process inbox/ or input_manifest.json unless explicitly requested.
+- Inspect relevant files before editing.
+- Make minimal, targeted changes.
+- Report changed files and checks run.
+'@ | Set-Content -Encoding UTF8 "AGENTS.override.md"
+
+3. Problem_request.md에 새로운 Issue가 추가됬어. Issue 1부터 해결해줘, 공통지시를 유지하며 Issue 2도 해결해줘 등으로 해결한다.
+
+4. /exit 등으로 codex를 종료한다.
+
+5. Rename-Item "AGENTS.override.md" "AGENTS.override.md.disabled"로 모드를 원상복귀한다.

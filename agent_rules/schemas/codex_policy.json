@@ -20,24 +20,116 @@
     }
   },
   "dangerous_commands": {
-    "match_mode": "prefix_or_contains",
-    "policy": "Do not execute unless the user explicitly requested it.",
+    "match_mode": "behavior_category_with_examples",
+    "policy": "Commands that can change files, history, environment, permissions, remote state, or execute downloaded code require explicit user approval unless the user has already asked for that exact action.",
+    "read_only_commands": {
+      "policy": "Read-only inspection commands are allowed unless combined with a changing operation.",
+      "examples": [
+        "git status --short",
+        "git diff --stat",
+        "git diff -- <path>",
+        "git branch --show-current",
+        "Get-ChildItem",
+        "Get-Content",
+        "Select-String"
+      ]
+    },
     "requires_explicit_user_approval": [
-      { "pattern": "rm -rf", "match": "contains" },
-      { "pattern": "Remove-Item", "match": "prefix" },
-      { "pattern": "ri -r", "match": "contains" },
-      { "pattern": "del ", "match": "prefix" },
-      { "pattern": "erase ", "match": "prefix" },
-      { "pattern": "rmdir ", "match": "prefix" },
-      { "pattern": "git reset", "match": "prefix" },
-      { "pattern": "git clean", "match": "prefix" },
-      { "pattern": "git checkout", "match": "prefix" },
-      { "pattern": "git switch", "match": "prefix" },
-      { "pattern": "git restore", "match": "prefix" },
-      { "pattern": "git push", "match": "prefix" },
-      { "pattern": "git commit", "match": "prefix" },
-      { "pattern": "npm install", "match": "prefix" },
-      { "pattern": "pip install", "match": "prefix" }
+      {
+        "category": "delete_or_destroy",
+        "description": "Delete, recursively remove, wipe, clean, or permanently destroy files or directories.",
+        "examples": [
+          { "pattern": "Remove-Item -Recurse", "match": "contains" },
+          { "pattern": "Remove-Item -Force", "match": "contains" },
+          { "pattern": "rm -rf", "match": "contains" },
+          { "pattern": "rm -r", "match": "contains" },
+          { "pattern": "ri -r", "match": "contains" },
+          { "pattern": "del /s", "match": "contains" },
+          { "pattern": "erase /s", "match": "contains" },
+          { "pattern": "rmdir /s", "match": "contains" },
+          { "pattern": "git clean -fd", "match": "contains" }
+        ]
+      },
+      {
+        "category": "large_move_or_overwrite",
+        "description": "Move, rename, overwrite, or bulk rewrite files or directories.",
+        "examples": [
+          { "pattern": "Move-Item", "match": "prefix" },
+          { "pattern": "mv ", "match": "prefix" },
+          { "pattern": "ren ", "match": "prefix" },
+          { "pattern": "Rename-Item", "match": "prefix" },
+          { "pattern": "Set-Content", "match": "prefix" },
+          { "pattern": "Out-File", "match": "contains" }
+        ]
+      },
+      {
+        "category": "git_history_change",
+        "description": "Rewrite, amend, discard, or otherwise alter git history or tracked file state.",
+        "examples": [
+          { "pattern": "git reset --hard", "match": "contains" },
+          { "pattern": "git reset", "match": "prefix" },
+          { "pattern": "git rebase", "match": "prefix" },
+          { "pattern": "git commit --amend", "match": "contains" },
+          { "pattern": "git restore", "match": "prefix" },
+          { "pattern": "git checkout --", "match": "contains" }
+        ]
+      },
+      {
+        "category": "branch_switch_or_restore",
+        "description": "Switch branches, restore files, or checkout paths in a way that can change the working tree.",
+        "examples": [
+          { "pattern": "git checkout", "match": "prefix" },
+          { "pattern": "git switch", "match": "prefix" },
+          { "pattern": "git checkout -f", "match": "contains" },
+          { "pattern": "git switch -f", "match": "contains" }
+        ]
+      },
+      {
+        "category": "remote_transfer",
+        "description": "Push, publish, upload, deploy, or otherwise change remote state.",
+        "examples": [
+          { "pattern": "git push", "match": "prefix" },
+          { "pattern": "gh release upload", "match": "prefix" },
+          { "pattern": "scp ", "match": "prefix" },
+          { "pattern": "rsync ", "match": "prefix" }
+        ]
+      },
+      {
+        "category": "download_and_execute_code",
+        "description": "Download code or scripts and execute them directly or indirectly.",
+        "examples": [
+          { "pattern": "curl.*\\|\\s*powershell", "match": "regex" },
+          { "pattern": "curl.*\\|\\s*pwsh", "match": "regex" },
+          { "pattern": "Invoke-WebRequest.*;\\s*powershell", "match": "regex" },
+          { "pattern": "Invoke-WebRequest.*;\\s*pwsh", "match": "regex" },
+          { "pattern": "iwr.*\\|\\s*powershell", "match": "regex" },
+          { "pattern": "wget.*\\|\\s*(sh|bash|powershell|pwsh)", "match": "regex" }
+        ]
+      },
+      {
+        "category": "package_install_or_environment_change",
+        "description": "Install packages, modify dependency state, or change the execution environment.",
+        "examples": [
+          { "pattern": "npm install", "match": "prefix" },
+          { "pattern": "pip install", "match": "prefix" },
+          { "pattern": "conda install", "match": "prefix" },
+          { "pattern": "winget install", "match": "prefix" },
+          { "pattern": "choco install", "match": "prefix" },
+          { "pattern": "Set-ExecutionPolicy", "match": "prefix" }
+        ]
+      },
+      {
+        "category": "privilege_or_execution_policy_bypass",
+        "description": "Elevate privileges or bypass execution restrictions.",
+        "examples": [
+          { "pattern": "Start-Process", "match": "prefix" },
+          { "pattern": "-Verb RunAs", "match": "contains" },
+          { "pattern": "ExecutionPolicy Bypass", "match": "contains" },
+          { "pattern": "-ExecutionPolicy Bypass", "match": "contains" },
+          { "pattern": "sudo ", "match": "prefix" },
+          { "pattern": "runas", "match": "prefix" }
+        ]
+      }
     ]
   },
   "git_checks": {
@@ -45,11 +137,27 @@
       "git status --short",
       "git diff --stat"
     ],
-    "after_work": [
-      "git status --short",
-      "git diff --stat",
-      "git diff -- \"{modified_file}\""
-    ],
+    "after_work": {
+      "commands": [
+        "git status --short",
+        "git diff --stat",
+        "git diff -- <tracked modified files>",
+        "git diff --cached --stat"
+      ],
+      "placeholders": {
+        "modified_files[]": "Tracked files with unstaged content changes from git status --short.",
+        "deleted_files[]": "Tracked files reported as deleted from git status --short.",
+        "untracked_files[]": "New files or folders reported with ?? from git status --short.",
+        "staged_files[]": "Files with staged changes, checked with git diff --cached --stat."
+      },
+      "status_handling": [
+        "Use git status --short as the source of truth for modified, deleted, and untracked paths.",
+        "Run git diff -- <tracked modified files> only when modified_files[] is not empty.",
+        "Deleted files must be listed from git status --short and should not be passed as required diff targets.",
+        "Untracked files do not appear in git diff; inspect or summarize them separately when relevant.",
+        "If a category is empty, report it as none rather than omitting it."
+      ]
+    },
     "optional": [
       "git diff --name-only"
     ]

@@ -1,0 +1,29 @@
+{
+  "subject": "고체역학",
+  "week": "8",
+  "session": "2",
+  "input_folder": "inbox/고체역학/8-2",
+  "output_note": "output/고체역학/고체역학 8-2.md",
+  "output_plan": "output/고체역학/고체역학_8-2_PLAN.md",
+  "primary_scope_anchor": "lecture_slide.pdf",
+  "inputs": [
+    {
+      "path": "lecture_slide.pdf",
+      "type": "ppt_pdf",
+      "role": "primary_scope_anchor",
+      "scope": "entire_pdf",
+      "status": "present",
+      "page_count": 28,
+      "read_path": "text_layer_with_rendered_page_check"
+    }
+  ],
+  "scope_decision": {
+    "status": "ready",
+    "reason": "lecture_slide.pdf만 제공되어 해당 PDF 전체를 본문 범위 기준(primary_scope_anchor)으로 사용함.",
+    "excluded_missing_inputs": [
+      "lecture_stt.txt",
+      "handwritten_note.pdf"
+    ],
+    "external_sources": "not_used_for_content_expansion"
+  }
+}

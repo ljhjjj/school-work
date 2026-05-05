@@ -20,7 +20,7 @@
 - 검증 결과는 hard rule 위반과 soft rule 위반으로 나누어 보고한다.
 - hard rule 위반이 남아 있으면 `completed`로 처리하지 않는다.
 - soft rule 위반만 남아 있으면 `completed_with_warnings` 또는 이에 준하는 상태로 보고할 수 있다.
-- 최종 리포트는 `schemas/report_templates.json`의 `template_selection`에 따라 선택한다.
+- 최종 리포트는 `agent_rules/schemas/report_templates.json`의 `template_selection`에 따라 선택한다.
 - Markdown 가이드에는 개별 템플릿 선택 규칙을 반복 서술하지 않는다.
 - Mini PLAN에서는 입력 커버리지 검증 결과를 구조 검증 결과 안에 간단히 포함할 수 있다.
 - Full PLAN에서 구조 및 입력 커버리지 검증 결과를 자세히 보고해야 하는 경우에는 `validation_report` 섹션을 함께 사용한다.

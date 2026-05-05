@@ -30,7 +30,7 @@
 
 ### [P0] 5.2 위험 명령 제한
 
-- 위험 명령 분류 및 정책은 `schemas/codex_policy.json`의 `dangerous_commands`를 따른다.
+- 위험 명령 분류 및 정책은 `agent_rules/schemas/codex_policy.json`의 `dangerous_commands`를 따른다.
 - 조회 전용 명령과 변경 명령의 구분은 해당 JSON의 `read_only_commands`와 `requires_explicit_user_approval`을 따른다.
 - Markdown 본문에는 카테고리별 세부 패턴을 반복 서술하지 않는다.
 - JSON 누락 시에도 삭제, 초기화, 권한 우회, 외부 코드 실행 등 명백한 고위험 명령은 사용자 승인 없이 실행하지 않는다.

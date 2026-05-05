@@ -2,7 +2,7 @@
 
 ## [P1] 3. Required Checks
 
-- 구조 검증 항목은 `schemas/validation_rules.json`의 `markdown_structure`, `latex`, `input_coverage`를 따른다.
+- 구조 검증 항목은 `agent_rules/schemas/validation_rules.json`의 `markdown_structure`, `latex`, `input_coverage`를 따른다.
 - 파일 경로 및 인코딩 규칙은 해당 JSON의 `paths`, `encoding`을 따른다.
 - 태그 분류 및 리포트 반영 기준은 `agent_rules/validation/report_validation.md`를 따른다.
 - Markdown 가이드는 검증 절차와 보고 방식만 설명한다.
@@ -12,7 +12,7 @@
 
 ## [P0/P1] 3.1 Hard Rule / Soft Rule
 
-- Hard/soft rule의 실제 분류는 `schemas/validation_rules.json`의 `severity.hard_rules`와 `severity.soft_rules`를 따른다.
+- Hard/soft rule의 실제 분류는 `agent_rules/schemas/validation_rules.json`의 `severity.hard_rules`와 `severity.soft_rules`를 따른다.
 - 이 섹션의 예시는 해당 JSON 분류를 설명하기 위한 보조 설명이다.
 - Hard rule 위반은 작업 완료로 인정하지 않는다. 가능한 경우 자동 수정하고, 자동 수정이 불가능하면 최종 리포트의 잔여 이슈에 명시한다.
 - Soft rule 위반은 작업을 중단하지 않는다. 최종 리포트 또는 PLAN의 `[⚠️ 실행 이슈]` / `잔여 이슈`에 기록한다.

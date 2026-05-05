@@ -55,13 +55,13 @@
 ### 📌 Guide D: 검증 및 품질 게이트
 - **언제 읽나요 (Trigger):** [문서 생성/수정 작업 시] 마크다운 본문 저장 후, PLAN 업데이트 후, 최종 리포트 출력 전.
 - **실행 행동:** 👉 셸 명령어(`Get-Content`, `type` 등)를 통해 `agent_rules/validation_guide.md` 읽기
-- **규칙 파일:** `schemas/validation_rules.json`, `schemas/report_templates.json`
+- **규칙 파일:** `agent_rules/schemas/validation_rules.json`, `agent_rules/schemas/report_templates.json`
 - **목적:** 작성된 `.md` 파일이 파일명, 경로, H1/H2/H3 구조, 수식 렌더링, PLAN 체크박스, 미해결 태그 규칙을 만족하는지 검증한다.
 
 ### 📌 Guide E: Codex 실행 및 변경 관리
 - **언제 읽나요 (Trigger):** [파일 생성/수정이 발생하는 모든 작업] 작업 시작 전과 작업 종료 전.
 - **실행 행동:** 👉 셸 명령어(`Get-Content`, `type` 등)를 통해 `agent_rules/codex_execution_guide.md` 읽기
-- **규칙 파일:** `schemas/codex_policy.json`, `schemas/report_templates.json`
+- **규칙 파일:** `agent_rules/schemas/codex_policy.json`, `agent_rules/schemas/report_templates.json`
 - **목적:** Codex가 Windows workspace에서 파일 변경 전후 git 상태, diff, 검증 명령, 실패 로그, 최종 보고를 안전하게 수행하도록 통제한다.
 
 ### 📌 Guide F: 입력 수집 및 작업 발견

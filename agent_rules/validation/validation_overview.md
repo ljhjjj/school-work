@@ -7,9 +7,9 @@
 ## [P1] 2. 필수 입력
 - 대상 마크다운 파일: `output/[과목명]/[과목명] [주차]-[차시].md`
 - 대상 PLAN 파일: `output/[과목명]/[과목명]_[주차]-[차시]_PLAN.md`
-- 검증 규칙: `schemas/validation_rules.json`
-- 리포트 템플릿: `schemas/report_templates.json`
-- 실행 정책: `schemas/codex_policy.json`
+- 검증 규칙: `agent_rules/schemas/validation_rules.json`
+- 리포트 템플릿: `agent_rules/schemas/report_templates.json`
+- 실행 정책: `agent_rules/schemas/codex_policy.json`
 
 ## [P1] 3. 검증 순서 요약
 

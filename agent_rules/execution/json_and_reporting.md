@@ -34,8 +34,8 @@
 
 ## [P1] 6. 검증 실행 절차
 파일 변경 후 가능한 경우 다음 순서로 검증한다.
-1. `validation_guide.md` 및 `schemas/validation_rules.json`을 확인해 검사한다.
-   - `schemas/validation_rules.json`이 누락된 경우 JSON 기반 구조 검증은 생략하고, 생략 사실을 `[⚠️ 실행 이슈]`에 기록한다.
+1. `agent_rules/validation/validation_overview.md` 및 `agent_rules/schemas/validation_rules.json`을 확인해 검사한다.
+   - `agent_rules/schemas/validation_rules.json`이 누락된 경우 JSON 기반 구조 검증은 생략하고, 생략 사실을 `[⚠️ 실행 이슈]`에 기록한다.
    - 단, 명백한 Markdown 문법 오류나 파일 저장/인코딩 문제처럼 JSON 없이도 확인 가능한 비기계적 점검은 수행할 수 있다.
 2. PLAN 체크박스와 실제 파일 비교
 3. 미해결 warning 태그 검색
@@ -57,6 +57,6 @@
 
 ### [P1] 8.2 작업 요약 및 최종 보고 형식
 
-- 최종 리포트는 `schemas/report_templates.json`의 템플릿을 선택한다.
+- 최종 리포트는 `agent_rules/schemas/report_templates.json`의 템플릿을 선택한다.
 - 템플릿 선택 기준은 해당 JSON의 `template_selection`을 따른다.
 - Markdown 본문에는 개별 템플릿 내용을 반복 서술하지 않는다.

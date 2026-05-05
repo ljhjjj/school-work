@@ -8,7 +8,7 @@
 - 경로에 한글이 포함된 경우 반드시 따옴표로 감싼다.
 
 ### [P0] 3.2 Git 상태 확인
-- `schemas/codex_policy.json`의 `git_checks.before_work`에 명시된 명령어 세트를 환경에 맞게 실행하여 현재 변경 상태를 파악한다.
+- `agent_rules/schemas/codex_policy.json`의 `git_checks.before_work`에 명시된 명령어 세트를 환경에 맞게 실행하여 현재 변경 상태를 파악한다.
 - 작업 전 `git status --short`를 확인해 기존 modified/deleted/untracked 상태를 기록한다.
 - 한글 경로가 octal escape 또는 따옴표 이스케이프 형태로 표시되면 작업 실패로 보지 않는다.
 - Git 한글 경로 가독성이 필요한 경우 `git config core.quotepath false` 설정을 권장한다.
@@ -29,7 +29,7 @@
 ## [P0/P1] 8. 작업 후 확인 절차
 
 ### [P0] 8.1 변경 내역 확인
-- `schemas/codex_policy.json`의 `git_checks.after_work`에 명시된 절차를 사용하여 방금 수행한 파일 변경 내역(diff)을 최종 확인한다.
+- `agent_rules/schemas/codex_policy.json`의 `git_checks.after_work`에 명시된 절차를 사용하여 방금 수행한 파일 변경 내역(diff)을 최종 확인한다.
 - 작업 후 `git status --short`, `git diff --stat`, `git diff --cached --stat`을 함께 확인한다.
 - `git status --short`를 기준으로 `Modified`, `Deleted`, `Untracked`, `Staged` 파일을 분리한다.
 - tracked 수정 파일이 있으면 해당 파일 목록을 대상으로 `git diff -- <tracked modified files>`를 실행한다.
